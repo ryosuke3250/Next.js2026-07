@@ -11,6 +11,7 @@ export default function Button({
 }: ButtonProps){
   return(
     <button
+      className="border p-2"
       type={type}
       onClick={onClick}
     >

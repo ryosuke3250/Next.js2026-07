@@ -1,4 +1,6 @@
 type InputProps = {
+  id?:string;
+  name?:string;
   type?: string;
   placeholder?: string;
 };
@@ -9,6 +11,7 @@ export default function Input({
 }:InputProps){
   return(
     <input
+     className="border p-2"
      type={type}
      placeholder={placeholder}
     />
