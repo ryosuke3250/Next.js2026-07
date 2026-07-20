@@ -1,8 +1,22 @@
+"use client";
 import Link from "next/link"
 import Button from "@/src/common/components/ui/Button";
 import Input from "@/src/common/components/ui/Input";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+
+type LoginFormData = {
+  email: string;
+  password: string;
+};
 
 export default function LoginForm() {
+  const router = useRouter();
+
+  const {register, handleSubmit} = useForm<LoginFormData>();
+  const onSubmit = () =>{
+    router.push("/posts")
+  }
   return (
     <div className="w-full max-w-md rounded-lg border p-5 ">
       <div className="mb-6 text-center">
@@ -12,7 +26,7 @@ export default function LoginForm() {
         </p>
       </div>
 
-      <form className="space-y-4 text-center">
+      <form className="space-y-4 text-center" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex items-center">
           <label htmlFor="email" className="w-32 text-left">
             メールアドレス
@@ -20,9 +34,9 @@ export default function LoginForm() {
 
           <Input
             id="email"
-            name="email"
             type="email"
             placeholder="example@example.com"
+            {...register("email")}
           />
         </div>
 
@@ -33,9 +47,9 @@ export default function LoginForm() {
 
           <Input
             id="password"
-            name="password"
             type="password"
             placeholder="パスワードを入力"
+            {...register("password")}
           />
         </div>
         <div className="text-center">

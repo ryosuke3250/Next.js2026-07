@@ -3,6 +3,7 @@ type InputProps = {
   name?:string;
   type?: string;
   placeholder?: string;
+  className?: string;
 };
 
 export default function Input({
