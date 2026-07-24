@@ -1,3 +1,4 @@
+import { posts } from "@/src/features/posts/data/posts"
 import Link from "next/link"
 export default function PostsPage(){
   return(
@@ -11,24 +12,20 @@ export default function PostsPage(){
           新規登録
         </Link>
       </div>
-      <div className="space-y-5">
-        <div className="border p-4 ">
-          <h2 className="text-lg">サンプルデータ</h2>
-          <p>投稿内容の表示</p>
-        </div>
-        <div className="border p-4 ">
-          <h2 className="text-lg">サンプルデータ</h2>
-          <p>投稿内容の表示</p>
-        </div>
-        <div className="border p-4 ">
-          <h2 className="text-lg">サンプルデータ</h2>
-          <p>投稿内容の表示</p>
-        </div>
-        <div className="border p-4 ">
-          <h2 className="text-lg">サンプルデータ</h2>
-          <p>投稿内容の表示</p>
-        </div>
+       <div className="space-y-4">
+        {posts.map((post) => (
+          <article
+            key={post.id}
+            className="border p-4"
+          >
+             <h2 className="text-lg font-bold">{post.title}</h2> 
+            <p className="mt-2 ">{post.content}</p>
 
+            <p className="mt-3 text-right">
+              {post.createdAt}
+            </p>
+          </article>
+        ))}
       </div>
     </main>
   )
