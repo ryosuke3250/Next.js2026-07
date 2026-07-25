@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Button from "@/src/common/components/ui/Button";
-import Input from "@/src/common/components/ui/Input";
+import Button from "@/src/components/ui/Button";
+import Input from "@/src/components/ui/Input";
 
 export default function NewPostPage(){
   return(

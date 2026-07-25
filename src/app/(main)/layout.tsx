@@ -1,5 +1,5 @@
-import Header from "@/src/common/components/layouts/Header";
-import Footer from "@/src/common/components/layouts/Footer";
+import Header from "@/src/components/layouts/Header";
+import Footer from "@/src/components/layouts/Footer";
 import React from "react";
 
 export default function MainLayout({
