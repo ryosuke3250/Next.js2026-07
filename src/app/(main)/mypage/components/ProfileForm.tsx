@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Button from "@/src/components/ui/Button";
 import Input from "@/src/components/ui/Input";
-import Textarea from "@/src/components/layouts/Textarea";
+import Textarea from "@/src/components/ui/Textarea";
 
 import { profileSchema } from "../schemas/profileSchema";
 import type { ProfileFormData } from "../types/user";

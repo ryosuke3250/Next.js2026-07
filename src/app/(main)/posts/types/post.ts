@@ -3,4 +3,9 @@ export type Post = {
   title: string;
   content: string;
   createdAt: string;
-}
+};
+
+export type PostFormData = {
+  title: string;
+  content: string;
+};
