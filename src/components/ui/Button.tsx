@@ -1,21 +1,18 @@
-type ButtonProps = {
-  children: React.ReactNode;
-  type?: "button" | "submit" ;
-  onClick?: () => void;
-};
+import type { ComponentPropsWithRef } from "react";
+
+// 通常のbuttonが持つ属性をすべて使えるようにする
+type ButtonProps = ComponentPropsWithRef<"button">;
 
 export default function Button({
-  children,
+  className = "",
   type = "button",
-  onClick,
-}: ButtonProps){
-  return(
+  ...props
+}: ButtonProps) {
+  return (
     <button
-      className="border p-2"
+      {...props}
       type={type}
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  )
+      className={`border px-4 py-2 ${className}`}
+    />
+  );
 }
