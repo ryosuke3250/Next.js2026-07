@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-import Button from "@/src/components/ui/Button";
-import Input from "@/src/components/ui/Input";
-import Textarea from "@/src/components/ui/Textarea";
-
+import { Button } from "@/src/components/ui/button";
+import { Input } from "@/src/components/ui/input";
+import { Textarea } from "@/src/components/ui/textarea";
+import { Label } from "@/src/components/ui/label";
 import type { PostFormData } from "../types/post";
 
 type PostFormProps = {
@@ -47,9 +47,9 @@ export default function PostForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label htmlFor="title" className="mb-2 block">
+        <Label htmlFor="title" className="mb-2 block">
           タイトル
-        </label>
+        </Label>
 
         <Input
           id="title"
@@ -63,9 +63,9 @@ export default function PostForm({
       </div>
 
       <div>
-        <label htmlFor="content" className="mb-2 block">
+        <Label htmlFor="content" className="mb-2 block">
           投稿内容
-        </label>
+        </Label>
 
         <Textarea
           id="content"

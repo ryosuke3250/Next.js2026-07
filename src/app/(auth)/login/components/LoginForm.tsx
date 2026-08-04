@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link"
-import Button from "@/src/components/ui/Button";
-import Input from "@/src/components/ui/Input";
+import { Button } from "@/src/components/ui/button";
+import { Input } from "@/src/components/ui/input";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 

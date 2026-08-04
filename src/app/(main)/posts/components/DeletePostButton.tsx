@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import Button from "@/src/components/ui/Button";
+import { Button } from "@/src/components/ui/button";
 
 import { deletePost } from "../api/posts";
 

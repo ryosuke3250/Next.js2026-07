@@ -2,9 +2,10 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import Button from "@/src/components/ui/Button";
-import Input from "@/src/components/ui/Input";
-import Textarea from "@/src/components/ui/Textarea";
+import { Button } from "@/src/components/ui/button";
+import { Input } from "@/src/components/ui/input";
+import { Textarea } from "@/src/components/ui/textarea";
+import { Label } from "@/src/components/ui/label";
 
 import { profileSchema } from "../schemas/profileSchema";
 import type { ProfileFormData } from "../types/user";
@@ -54,9 +55,9 @@ export default function ProfileForm({
     >
       {/* 名前入力欄 */}
       <div>
-        <label htmlFor="name" className="mb-2 block">
+        <Label htmlFor="name" className="mb-2 block">
           名前
-        </label>
+        </Label>
 
         <Input
           id="name"
@@ -77,9 +78,9 @@ export default function ProfileForm({
 
       {/* メールアドレス入力欄 */}
       <div>
-        <label htmlFor="email" className="mb-2 block">
+        <Label htmlFor="email" className="mb-2 block">
           メールアドレス
-        </label>
+        </Label>
 
         <Input
           id="email"
@@ -100,9 +101,9 @@ export default function ProfileForm({
 
       {/* 自己紹介入力欄 */}
       <div>
-        <label htmlFor="introduction" className="mb-2 block">
+        <Label htmlFor="introduction" className="mb-2 block">
           自己紹介
-        </label>
+        </Label>
 
         <Textarea
           id="introduction"

@@ -10,7 +10,7 @@ import { getComments, createComment } from "../api/comments";
 import CommentForm from "../components/CommentForm";
 import type { Post } from "../types/post";
 import type { Comment } from "../types/comment";
-import type { CommentFormData } from "../schemas/comentSchema";
+import type { CommentFormData } from "../schemas/commentSchema";
 
 export default function PostDetailPage() {
   const params = useParams<{ id: string }>();
