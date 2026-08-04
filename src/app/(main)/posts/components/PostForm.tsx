@@ -28,8 +28,8 @@ export default function PostForm({
   const [error, setError] = useState("");
 
   // フォーム送信時の処理
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
     if (!title.trim() || !content.trim()) {
       setError("タイトルと投稿内容を入力してください");
@@ -58,7 +58,7 @@ export default function PostForm({
           value={title}
           placeholder="タイトルを入力"
           className="w-full"
-          onChange={(event) => setTitle(event.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </div>
 
@@ -73,7 +73,7 @@ export default function PostForm({
           value={content}
           placeholder="投稿内容を入力"
           className="w-full"
-          onChange={(event) => setContent(event.target.value)}
+          onChange={(e) => setContent(e.target.value)}
         />
       </div>
 
