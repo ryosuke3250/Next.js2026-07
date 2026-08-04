@@ -80,7 +80,7 @@ export default function PostForm({
       {error && <p className="text-red-600">{error}</p>}
 
       <div className="text-center">
-        <Button type="submit">{submitLabel}</Button>
+        <Button type="submit" variant="outline">{submitLabel}</Button>
       </div>
     </form>
   );

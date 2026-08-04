@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { Button } from "@/src/components/ui/button";
 import { getPosts } from "./api/posts";
 import type { Post } from "./types/post";
 
@@ -17,10 +18,11 @@ export default function PostsPage() {
     <main className="mx-auto w-full max-w-2xl p-6">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">投稿一覧</h1>
-
-        <Link href="/posts/new" className="border px-4 py-2">
-          新規投稿
-        </Link>
+        <Button variant="outline">
+          <Link href="/posts/new" className="px-4 py-2">
+            新規投稿
+          </Link>
+        </Button>
       </div>
 
       {posts.length === 0 ? (

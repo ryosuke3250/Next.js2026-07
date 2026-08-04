@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import PostForm from "../../components/PostForm";
+import { Button } from "@/src/components/ui/button";
 import { getPost, updatePost } from "../../api/posts";
 import type { Post, PostFormData } from "../../types/post";
 
@@ -53,9 +54,11 @@ export default function EditPostPage() {
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">投稿編集</h1>
 
-        <Link href={`/posts/${post.id}`} className="border px-4 py-2">
-          詳細へ戻る
-        </Link>
+        <Button variant="outline">
+          <Link href={`/posts/${post.id}`} className="px-4 py-2">
+            詳細へ戻る
+          </Link>
+        </Button>
       </div>
 
       <PostForm

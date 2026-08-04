@@ -11,6 +11,7 @@ import CommentForm from "../components/CommentForm";
 import type { Post } from "../types/post";
 import type { Comment } from "../types/comment";
 import type { CommentFormData } from "../schemas/commentSchema";
+import { Button } from "@/src/components/ui/button";
 
 export default function PostDetailPage() {
   const params = useParams<{ id: string }>();
@@ -71,12 +72,14 @@ export default function PostDetailPage() {
       </article>
 
       <div className="mt-6 flex gap-4">
-        <Link
-          href={`/posts/${post.id}/edit`}
-          className="border px-4 py-2"
-        >
-          編集する
-        </Link>
+        <Button variant="outline">
+          <Link
+            href={`/posts/${post.id}/edit`}
+            className=" px-4 py-2"
+          >
+            編集する
+          </Link>
+        </Button>
 
         <DeletePostButton postId={post.id} />
       </div>

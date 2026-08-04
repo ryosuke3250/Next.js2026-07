@@ -30,7 +30,7 @@ export default function DeletePostButton({
   };
 
   return (
-    <Button type="button" onClick={handleDelete}>
+    <Button type="button" onClick={handleDelete} variant="outline">
       削除
     </Button>
   );
