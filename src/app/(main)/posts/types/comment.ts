@@ -3,4 +3,5 @@ export type Comment = {
   postId: string;
   content: string;
   createdAt: string;
+  updatedAt?: string;
 };

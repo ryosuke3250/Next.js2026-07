@@ -55,5 +55,35 @@ export const createComment = (
   return newComment
 }
 
+export const updateComment =(
+  commentId: string,
+  data: CommentFormData,
+): Comment | undefined => {
+  const comments = getAllComments();
+
+  //map内で更新後のコメントを代入するためlet
+  let updatedComment :Comment | undefined
+
+  const updatedComments = comments.map((comment) =>{
+    if(comment.id !== commentId){
+      return comment;
+    }
+
+    updatedComment = {
+      ...comment,
+      content:data.content,
+      updatedAt: new Date().toLocaleString("ja-JP"),
+    };
+    return updatedComment;
+  });
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(updatedComments),
+  )
+
+  return updatedComment;
+}
+
   
 //crypto.randomUUID()...重複しにくいランダムなIDを自動生成する
