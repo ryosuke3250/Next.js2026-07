@@ -30,8 +30,8 @@ export default function DeletePostButton({
   };
 
   return (
-    <Button type="button" onClick={handleDelete} variant="outline">
+    <Button type="button" onClick={handleDelete} variant="destructive">
       削除
     </Button>
   );
-}
+};

@@ -45,7 +45,7 @@ export default function CommentForm({
      onSubmit={handleSubmit(handleCommentSubmit)}
      >
       <Label htmlFor="comment" className="block mt-10">
-        コメントを送る
+        内容
       </Label>
 
       <Textarea
