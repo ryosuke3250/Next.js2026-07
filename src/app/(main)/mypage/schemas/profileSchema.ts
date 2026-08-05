@@ -11,7 +11,9 @@ export const profileSchema = z.object({
   email: z
     .string()
     .min(1, "メールアドレスを入力してください")
-    .email("正しいメールアドレスを入力してください"),
+    .pipe(
+      z.email({error:"正しいメールアドレスを入力してください"}),
+    ),
 
   // 自己紹介の入力ルール（任意にするためminはなし）
   introduction: z
