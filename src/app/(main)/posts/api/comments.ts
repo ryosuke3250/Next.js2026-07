@@ -85,5 +85,18 @@ export const updateComment =(
   return updatedComment;
 }
 
+export const deleteComment = (commentId: string): void => {
+  const comments = getAllComments();
+
+  const updatedComments = comments.filter(
+    (comment) => comment.id !== commentId,
+  );
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(updatedComments),
+  );
+};
+
   
 //crypto.randomUUID()...重複しにくいランダムなIDを自動生成する
