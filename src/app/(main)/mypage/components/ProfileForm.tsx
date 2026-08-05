@@ -48,7 +48,6 @@ export default function ProfileForm({
 
   return (
     // 入力内容が正しい場合だけonSubmitを実行する
-    // 入力内容が正しい場合だけonSubmitを実行する
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="space-y-5"
