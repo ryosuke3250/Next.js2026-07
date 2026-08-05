@@ -10,6 +10,8 @@ import {
   updateProfile,
 } from "../api/profile";
 import type { ProfileFormData } from "../types/user";
+import { Card, CardContent } from "@/src/components/ui/card";
+import { buttonVariants } from "@/src/components/ui/button";
 
 export default function MyPageEditPage() {
   const router = useRouter();
@@ -50,18 +52,16 @@ export default function MyPageEditPage() {
           マイページ編集
         </h1>
 
-        <Link
-          href="/mypage"
-          className="border px-4 py-2"
-        >
+        <Link href="/mypage" className={buttonVariants({ variant: "outline" })}>
           戻る
         </Link>
       </div>
 
-      <ProfileForm
-        initialValues={user}
-        onSubmit={handleUpdate}
-      />
+      <Card>
+        <CardContent>
+          <ProfileForm initialValues={user} onSubmit={handleUpdate} />
+        </CardContent>
+      </Card>
     </main>
   );
 }
