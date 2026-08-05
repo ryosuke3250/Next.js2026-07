@@ -1,6 +1,6 @@
 export default function Footer(){
   return(
-    <footer className="border px-5 mx-5 text-center">
+    <footer className="mx-auto mt-auto w-full max-w-5xl border-t px-6 py-4 text-center text-sm ">
       ©202607.naijo
     </footer>
   )
