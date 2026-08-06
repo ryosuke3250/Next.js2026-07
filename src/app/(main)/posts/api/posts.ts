@@ -2,20 +2,15 @@ import type { Post, PostFormData } from "../types/post";
 
 const STORAGE_KEY = "posts";
 
-const initialPosts: Post[] = [
-  {
-    id: 1,
-    title: "最初の投稿",
-    content: "最初の投稿内容です。",
-    createdAt: "2026-07-26",
-  },
-  {
-    id: 2,
-    title: "2件目の投稿",
-    content: "2件目の投稿内容です。",
-    createdAt: "2026-07-26",
-  },
-];
+const formatDate = (): string => {
+  return new Date().toLocaleString("ja-JP",{
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
 
 // localStorageへ投稿一覧を保存する
 const savePosts = (posts: Post[]) => {
@@ -27,8 +22,7 @@ export const getPosts = (): Post[] => {
   const savedPosts = localStorage.getItem(STORAGE_KEY);
 
   if (!savedPosts) {
-    savePosts(initialPosts);
-    return initialPosts;
+    return [];
   }
 
   return JSON.parse(savedPosts) as Post[];
@@ -40,14 +34,15 @@ export const getPost = (id: number): Post | undefined => {
   return posts.find((post) => post.id === id);
 };
 
-export const createPost = (data: PostFormData): Post => {
+export const createPost = (userId: string, data: PostFormData): Post => {
   const posts = getPosts();
 
   const newPost: Post = {
     id: Date.now(),
+    userId,
     title: data.title,
     content: data.content,
-    createdAt: new Date().toLocaleDateString("ja-JP"),
+    createdAt: formatDate(),
   };
 
   savePosts([newPost, ...posts]);
@@ -71,6 +66,7 @@ export const updatePost = (
     ...targetPost,
     title: data.title,
     content: data.content,
+    updatedAt: formatDate(),
   };
 
   const updatedPosts = posts.map((post) =>

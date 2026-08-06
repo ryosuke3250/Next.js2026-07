@@ -9,12 +9,24 @@ import type { PostFormData } from "../types/post";
 import { Card, CardContent } from "@/src/components/ui/card";
 import { buttonVariants } from "@/src/components/ui/button";
 
+type CurrentUser ={
+  id: string;
+  name: string;
+  email: string;
+}
+
 export default function NewPostPage() {
   const router = useRouter();
 
   const handleCreate = (data: PostFormData) => {
-    createPost(data);
-    router.push(`/posts`);
+    const savedUser = localStorage.getItem("currentUser");
+    if(!savedUser){
+      router.push("/login");
+      return
+    }
+    const currentUser = JSON.parse(savedUser) as CurrentUser;
+    const newPost = createPost(currentUser.id, data);
+    router.push(`/posts/${newPost.id}`);
   };
 
   return (

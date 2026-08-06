@@ -137,16 +137,17 @@ export default function PostDetailPage() {
         <CardContent>
           <p className="whitespace-pre-wrap break-words">{post.content}</p>
         </CardContent>
-
-        <CardFooter className="justify-end gap-2">
-          <Link
-            href={`/posts/${post.id}/edit`}
-            className={buttonVariants({ variant: "outline" })}
-          >
-            編集する
-          </Link>
-          <DeletePostButton postId={post.id} />
-        </CardFooter>
+        {currentUser?.id === post.userId &&(
+          <CardFooter className="justify-end gap-2">
+            <Link
+              href={`/posts/${post.id}/edit`}
+              className={buttonVariants({ variant: "outline" })}
+            >
+              編集する
+            </Link>
+            <DeletePostButton postId={post.id} />
+          </CardFooter>
+        )}
       </Card>
 
       <section className="mt-10">
