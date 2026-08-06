@@ -77,10 +77,14 @@ export default function PostForm({
         />
       </div>
 
-      {error && <p className="text-red-600">{error}</p>}
+      {error && (
+        <p role="alert" className="text-sm text-destructive">
+          {error}
+        </p>
+      )}
 
-      <div className="text-center">
-        <Button type="submit" variant="outline">{submitLabel}</Button>
+      <div className="flex justify-end">
+        <Button type="submit">{submitLabel}</Button>
       </div>
     </form>
   );
