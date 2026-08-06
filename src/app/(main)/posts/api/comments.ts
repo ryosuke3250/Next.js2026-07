@@ -26,6 +26,7 @@ export const getComments = (postId: string): Comment[] => {
 //コメント作成
 export const createComment = (
   postId:string,
+  userId:string,
   data:CommentFormData,
 ): Comment => {
   const comments = getAllComments();
@@ -41,6 +42,7 @@ export const createComment = (
   const newComment: Comment = {
     id: crypto.randomUUID(),
     postId,
+    userId,
     content:data.content,
     createdAt:now,
   };
@@ -72,7 +74,13 @@ export const updateComment =(
     updatedComment = {
       ...comment,
       content:data.content,
-      updatedAt: new Date().toLocaleString("ja-JP"),
+      updatedAt: new Date().toLocaleString("ja-JP", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
     };
     return updatedComment;
   });

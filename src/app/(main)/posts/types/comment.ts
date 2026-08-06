@@ -4,4 +4,5 @@ export type Comment = {
   content: string;
   createdAt: string;
   updatedAt?: string;
+  userId: string;
 };

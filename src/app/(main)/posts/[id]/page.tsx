@@ -22,6 +22,11 @@ import {
 } from "@/src/components/ui/card";
 import { Textarea } from "@/src/components/ui/textarea";
 
+type CurrentUser = {
+  id: string;
+  name: string;
+  email: string;}
+
 export default function PostDetailPage() {
   const params = useParams<{ id: string }>();
 
@@ -29,6 +34,7 @@ export default function PostDetailPage() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
+  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
   const [editingContent, setEditingContent] = useState("");
 
   useEffect(() => {
@@ -36,11 +42,21 @@ export default function PostDetailPage() {
 
     setPost(getPost(postId));
     setComments(getComments(params.id));
+    
+    const savedUser = localStorage.getItem("currentUser");
+    if(savedUser) {
+      setCurrentUser(
+        JSON.parse(savedUser) as CurrentUser,
+      );
+    }
     setIsLoading(false);
   }, [params.id]);
 
   const handleCreateComment = (data: CommentFormData) => {
-    createComment(params.id, data);
+    if(!currentUser){
+      return
+    }
+    createComment(params.id, currentUser.id, data);
     setComments(getComments(params.id));
   };
 
@@ -198,24 +214,26 @@ export default function PostDetailPage() {
                             </p>
                           )}
                         </div>
-                        <div className="flex gap-2">
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleStartEdit(comment)}
-                          >
-                            編集
-                          </Button>
-                          <Button
-                            type="button"
-                            variant="destructive"
-                            size="sm"
-                            onClick={() => handleDeleteComment(comment.id)}
-                          >
-                            削除
-                          </Button>
-                        </div>
+                        {currentUser?.id === comment.userId &&(
+                          <div className="flex gap-2">
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleStartEdit(comment)}
+                            >
+                              編集
+                            </Button>
+                            <Button
+                              type="button"
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => handleDeleteComment(comment.id)}
+                            >
+                              削除
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     </>
                   )}
