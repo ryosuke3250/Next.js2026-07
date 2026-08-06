@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { Button } from "@/src/components/ui/button";
+import { buttonVariants } from "@/src/components/ui/button";
 import { getPosts } from "./api/posts";
 import type { Post } from "./types/post";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/src/components/ui/card";
 
 export default function PostsPage() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -18,11 +19,12 @@ export default function PostsPage() {
     <main className="mx-auto w-full max-w-2xl p-6">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">投稿一覧</h1>
-        <Button variant="outline">
-          <Link href="/posts/new" className="px-4 py-2">
-            新規投稿
-          </Link>
-        </Button>
+        <Link
+          href="/posts/new"
+          className={buttonVariants({ variant: "default" })}
+        >
+          新規投稿
+        </Link>
       </div>
 
       {posts.length === 0 ? (
@@ -30,22 +32,27 @@ export default function PostsPage() {
       ) : (
         <div className="space-y-4">
           {posts.map((post) => (
-            <article key={post.id} className="rounded border p-4">
-              <h2 className="text-xl font-bold">{post.title}</h2>
+            <Card key={post.id}>
+              <CardHeader>
+                <CardTitle className="text-xl">{post.title}</CardTitle>
+                <CardDescription>{post.createdAt}</CardDescription>
+              </CardHeader>
 
-              <p className="mt-2 text-sm text-gray-500">
-                {post.createdAt}
-              </p>
+              <CardContent>
+                <p className="line-clamp-2 whitespace-pre-wrap break-words">
+                  {post.content}
+                </p>
+              </CardContent>
 
-              <p className="mt-3 line-clamp-2">{post.content}</p>
-
-              <Link
-                href={`/posts/${post.id}`}
-                className="mt-4 inline-block underline"
-              >
-                詳細を見る
-              </Link>
-            </article>
+              <CardFooter className="justify-end">
+                <Link
+                  href={`/posts/${post.id}`}
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  詳細を見る
+                </Link>
+              </CardFooter>
+            </Card>
           ))}
         </div>
       )}
