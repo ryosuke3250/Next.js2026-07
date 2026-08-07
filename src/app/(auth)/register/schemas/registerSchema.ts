@@ -24,6 +24,7 @@ export const registerSchema = z
       .min(1,"確認用パスワードを入力してください"),
   })
   
+  //パスワード（確認）用
   .refine(
     (data) => data.password === data.passwordConfirm,
     {
