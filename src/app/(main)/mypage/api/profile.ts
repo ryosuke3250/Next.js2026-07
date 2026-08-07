@@ -1,32 +1,44 @@
 import type { ProfileFormData } from "../types/user";
 
 // localStorageで使うキー
-const STORAGE_KEY = "userProfile";
+const PROFILE_STORAGE_KEY = "userProfile";
+const CURRENT_USER_STORAGE_KEY = "currentUser";
 
-// 初期表示用のユーザー情報
-const initialProfile: ProfileFormData = {
-  name: "内城諒祐",
-  email: "aaaaa@example.com",
-  introduction:
-    "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。",
-};
+type CurrentUser = {
+  id: string;
+  name: string;
+  email: string;
+}
 
 // ユーザー情報を取得する
-export const getProfile = (): ProfileFormData => {
-  const savedProfile = localStorage.getItem(STORAGE_KEY);
+export const getProfile = (): ProfileFormData | null => {
+  const savedProfile = localStorage.getItem(
+    PROFILE_STORAGE_KEY,
+  );
+
+  if(savedProfile) {
+    return JSON.parse(savedProfile) as ProfileFormData;
+  };
+
+  const savedCurrentUser = localStorage.getItem(
+    CURRENT_USER_STORAGE_KEY,
+  )
 
   // 保存されたデータがない場合
-  if (!savedProfile) {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(initialProfile),
-    );
+  if (!savedCurrentUser) {
+    return null;
+  };
 
-    return initialProfile;
-  }
+  const currentUser = JSON.parse(
+    savedCurrentUser,
+  ) as CurrentUser;
 
   // 保存された文字列をオブジェクトに戻して返す
-  return JSON.parse(savedProfile) as ProfileFormData;
+  return {
+    name: currentUser.name,
+    email: currentUser.email,
+    introduction: "",
+  }
 };
 
 // ユーザー情報を更新する
@@ -34,7 +46,7 @@ export const updateProfile = (
   data: ProfileFormData,
 ): void => {
   localStorage.setItem(
-    STORAGE_KEY,
+    PROFILE_STORAGE_KEY,
     JSON.stringify(data),
   );
 };
