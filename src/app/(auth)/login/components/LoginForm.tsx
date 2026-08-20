@@ -7,8 +7,8 @@ import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src/components/ui/card";
-import { LoginFormData, loginSchema } from "../schemas/loginSchema";
-
+import { type LoginFormData, loginSchema } from "../schemas/loginSchema";
+import { getUsers } from "../../register/api/users";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -22,36 +22,43 @@ export default function LoginForm() {
   });
   const onSubmit = async (data: LoginFormData) =>{
     try {
-      const response = await fetch("/api/login",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify(data),
-      });
+      const users = getUsers();
 
-      const result = await response.json();
+      const user = users.find(
+        (user) => 
+          user.email.toLowerCase() ===
+            data.email.toLowerCase() &&
+          user.password === data.password,
+      )
 
-      if(!response.ok){
+      if(!user) {
         setError("root",{
-          type: "server",
-          message: result.message,
+          type: "manual",
+          message: "メールアドレス、またはパスワードが違います。"
         });
 
         return;
       }
 
+      const currentUser = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      };
+
       localStorage.setItem(
         "currentUser",
-        JSON.stringify(result.user),
+        JSON.stringify(currentUser),
       );
 
       router.push("/posts");
     } catch {
       setError("root",{
-          type: "server",
-          message: "ログインに失敗しました。"
+        type: "manual",
+        message: "ログインに失敗しました。"
       });
     }
-  }
+  };
   return (
     <Card className="w-full max-w-md">
       <CardHeader className="text-center">

@@ -33,4 +33,4 @@ export const createUser = (
   );
 
   return newUser
-}
+};
